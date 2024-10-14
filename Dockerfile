@@ -1,4 +1,4 @@
-FROM golang:1.23.2-alpine AS builder
+FROM golang:1.21.0-alpine AS builder
 
 WORKDIR /app
 
@@ -9,10 +9,11 @@ ENV CGO_ENABLED=0
 RUN go build -ldflags "-s -w" -o meuapp .
 
 # Instala o UPX
-RUN apk add --no-cache upx
+RUN apk add upx
 
 # Compacta o executável com UPX
-RUN upx --best --lzma meuapp
+#RUN upx --best --lzma meuapp
+RUN upx --ultra-brute --lzma meuapp
 
 FROM scratch
 
