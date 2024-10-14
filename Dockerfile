@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN go build -o meuapp .
+RUN go build -ldflags "-s -w" -o meuapp .
 
 FROM scratch
 
